@@ -10,16 +10,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var weatherWidget_1 = require('../service/weatherWidget');
+var weather_1 = require('../model/weather');
 var WeatherWidget = (function () {
     function WeatherWidget(service) {
-        var _this = this;
         this.service = service;
+        this.weatherData = new weather_1.Weather(null, null, null, null, null);
+        this.currentSpeedUnit = "mph";
+        this.icons = new Skycons({ "color": "#ff00de" });
+    }
+    WeatherWidget.prototype.ngOnInit = function () {
+        this.getCurrentLocation();
+    };
+    WeatherWidget.prototype.getCurrentLocation = function () {
+        var _this = this;
         this.service.getCurrentLocation()
             .subscribe(function (position) {
             _this.pos = position;
-            _this.service.getCurrentWeather(_this.pos.coords.latitude, _this.pos.coords.longitude).subscribe(function (weather) { console.log(weather); }, function (err) { console.log('error', err); });
+            _this.getCurrentWeather();
         }, function (err) { console.error(err); });
-    }
+    };
+    WeatherWidget.prototype.getCurrentWeather = function () {
+        var _this = this;
+        this.service.getCurrentWeather(this.pos.coords.latitude, this.pos.coords.longitude)
+            .subscribe(function (weather) {
+            _this.weatherData.temp = weather['currently']['temperature'];
+            _this.weatherData.summary = weather['currently']['summary'];
+            _this.weatherData.wind = weather['currently']['windSpeed'];
+            _this.weatherData.humidity = weather['currently']['humidity'];
+            _this.weatherData.icon = weather['currently']['icon'];
+            _this.setIcons();
+            console.log('icons', _this.icons);
+            console.log('weather', _this.weatherData);
+        }, function (err) { console.log('error', err); });
+    };
+    WeatherWidget.prototype.setIcons = function () {
+        this.icons.add("icon", this.weatherData.icon);
+        this.icons.play();
+    };
     WeatherWidget = __decorate([
         core_1.Component({
             moduleId: module.id,
@@ -32,6 +59,5 @@ var WeatherWidget = (function () {
     ], WeatherWidget);
     return WeatherWidget;
 }());
-exports.WeatherWidget = WeatherWidget;
-;
+exports.WeatherWidget = WeatherWidget; // end of class
 //# sourceMappingURL=weatherWidget.js.map
