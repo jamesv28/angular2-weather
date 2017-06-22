@@ -1,0 +1,29 @@
+/**     --Colors--
+yellow: #E1C829
+green: #18DD00
+blue: #2FB5F3
+pink #FC82C3
+purple #1E023F
+**/
+
+.card,.card-header,.card-footer{
+    background-color: #1E023F;
+    margin-top: 2rem;
+    color: #fff;
+    text-shadow: 
+                 0 0 25px #ff00de,
+                 0 0 40px #ff00de,
+                 0 0 60px #ff00de,
+                 0 0 80px #ff00de;
+    border: none;
+}
+.card-block {
+    text-align: center;
+}
+
+.card-footer {
+    text-transform: uppercase;    
+}
+.card-header,.card-footer {
+    text-align: center;
+}
