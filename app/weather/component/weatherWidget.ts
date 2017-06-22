@@ -16,10 +16,8 @@ export class WeatherWidget implements OnInit {
     weatherData = new Weather(null, null, null, null, null);
     currentSpeedUnit = "mph";
     icons = new Skycons({"color": "#ff00de"});
-
-    constructor(private service: WeatherService) {
-       
-    }
+    dataReceived = false;
+    constructor(private service: WeatherService) { }
 
     ngOnInit() {
         this.getCurrentLocation();
@@ -43,7 +41,7 @@ export class WeatherWidget implements OnInit {
                 this.weatherData.humidity = weather['currently']['humidity'];
                 this.weatherData.icon = weather['currently']['icon'];
                 this.setIcons();
-                console.log('icons',this.icons);
+                this.dataReceived = true;
                 console.log('weather', this.weatherData);
             }
             , err => { console.log('error', err) });

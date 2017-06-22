@@ -17,6 +17,7 @@ var WeatherWidget = (function () {
         this.weatherData = new weather_1.Weather(null, null, null, null, null);
         this.currentSpeedUnit = "mph";
         this.icons = new Skycons({ "color": "#ff00de" });
+        this.dataReceived = false;
     }
     WeatherWidget.prototype.ngOnInit = function () {
         this.getCurrentLocation();
@@ -39,7 +40,7 @@ var WeatherWidget = (function () {
             _this.weatherData.humidity = weather['currently']['humidity'];
             _this.weatherData.icon = weather['currently']['icon'];
             _this.setIcons();
-            console.log('icons', _this.icons);
+            _this.dataReceived = true;
             console.log('weather', _this.weatherData);
         }, function (err) { console.log('error', err); });
     };

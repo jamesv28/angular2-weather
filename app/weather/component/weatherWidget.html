@@ -1,6 +1,6 @@
 <div class="col-md-6 offset-md-3">
     <div class="card">
-        <div class="card-header">
+        <div class="card-header" [class.invisible]="!dataReceived">
             <div class="col-xs-6">
                 <p>Denver, CO</p>
             </div>
@@ -9,10 +9,11 @@
             </div>
         </div>
         <div class="card-block text-center">
-                <canvas id="icon"></canvas>
-                <p>{{weatherData.summary}}</p>
+            <i class="fa fa-cog fa-spin fa-4x" [class.invisible]="dataReceived"></i>
+            <canvas id="icon"></canvas>
+            <p>{{weatherData.summary}}</p>
         </div>
-        <div class="card-footer">
+        <div class="card-footer" [class.invisible]="!dataReceived">
             <div class="col-xs-6">
                 <p>Wind</p>
                 <p>{{weatherData.wind | speedUnit: currentSpeedUnit }}</p>

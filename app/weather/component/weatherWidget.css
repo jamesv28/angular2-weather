@@ -27,3 +27,13 @@ purple #1E023F
 .card-header,.card-footer {
     text-align: center;
 }
+
+.fa-cog {
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    margin: auto;
+    font-size: 100px;
+    position: absolute;
+    width: 50%;
+}
